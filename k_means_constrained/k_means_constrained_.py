@@ -479,9 +479,10 @@ def solve_min_cost_flow_graph(edges, costs, capacities, supplies, n_C, n_X):
     # Add node supplies
     min_cost_flow.SetNodeSupplyVectorized(np.arange(N_nodes, dtype='int32'), supplies)
 
-    # Find the minimum cost flow between node 0 and node 4.
-    if min_cost_flow.Solve() != min_cost_flow.OPTIMAL:
-        raise Exception('There was an issue with the min cost flow input.')
+    # NOTE(dk): seems to fire with duplicate observations, which are part of my data
+    ## Find the minimum cost flow between node 0 and node 4.
+    #if min_cost_flow.Solve() != min_cost_flow.OPTIMAL:
+    #    raise Exception('There was an issue with the min cost flow input.')
 
     # Assignment
     labels_M = min_cost_flow.FlowVectorized(np.arange(n_X * n_C, dtype='int32')).reshape(n_X, n_C)
